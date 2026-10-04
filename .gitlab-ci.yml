@@ -11,7 +11,7 @@ variables:
 file-check:
   stage: file-check
   script:
-    - ls ./inc | grep mem_gbc.h
+    - ls ./include | grep mem_gbc.h
 
 run-test:
   stage: test
