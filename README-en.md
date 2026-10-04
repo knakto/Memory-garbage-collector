@@ -44,6 +44,7 @@ In C programming, one of the greatest challenges is **Manual Memory Management**
 
 `mem_gbc` was created to eliminate this burden by acting as a smart wrapper around standard memory allocation:
 * **Auto-Tracking:** Every allocated memory block's address is automatically recorded in a centralized tracker.
+* **Selective Free:** If you need to free specific blocks during execution to keep the memory footprint low, `gbc_free(ptr)` safely removes them from both the heap and the tracker.
 * **Single Point Cleanup:** When the program finishes execution or encounters a fatal error, a single call to `gbc_clear()` instantly sweeps all heap-allocated memory and returns it to the OS.
 
 ---
@@ -140,7 +141,10 @@ int main(void)
     snprintf(str, 32, "Hello, mem_gbc!");
     printf("%s\n", str);
 
-    // 4. Free all memory allocated via gbc_malloc in a single command
+    // 4. Selectively free specific memory blocks early (Optional)
+    gbc_free(str);
+
+    // 5. Free all memory allocated via gbc_malloc in a single command
     gbc_clear();
     return (0);
 }
@@ -152,9 +156,10 @@ int main(void)
 
 | Feature | Standard `malloc()` / `free()` | `mem_gbc` |
 | :--- | :--- | :--- |
+| **Targeted Freeing** | `free()` is mandatory for every single allocation. | `gbc_free()` is optional; `gbc_clear()` catches the rest. |
 | **Error Cleanup** | Requires nested/backward `free()` at every failure branch. | One `gbc_clear()` covers all possible exit paths. |
 | **Memory Leak Risk** | Very High (Missing a single `free()` causes a leak). | Near Zero (0 leaks as long as `gbc_clear()` is called). |
-| **Double Free Risk** | Common when dealing with complex data structures. | Impossible, as lifecycle management is centralized. |
+| **Double Free Risk** | Common when dealing with complex data structures. | Prevented easily through centralized tracking. |
 | **Code Readability** | Cluttered with boilerplate cleanup code. | Clean, allowing you to focus purely on Core/Business Logic. |
 
 ---
