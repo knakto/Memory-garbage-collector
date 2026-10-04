@@ -10,9 +10,8 @@ variables:
 
 file-check:
   stage: file-check
-  artifacts:
-    paths:
-      - ./include/mem_gbc.h
+  script:
+    - ls ./inc | grep mem_gbc.h
 
 run-test:
   stage: test
