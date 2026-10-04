@@ -1,0 +1,32 @@
+image: silkeh/clang:latest
+
+stages:
+  - file-check
+  - test
+  - memory-check
+
+variables:
+  DEBIAN_FRONTEND: noninteractive
+
+file-check:
+  stage: file-check
+  artifacts:
+    paths:
+      - ./include/mem_gbc.h
+
+run-test:
+  stage: test
+  dependencies:
+    - file-check
+  script:
+    - make test
+
+memory-check:
+  stage: memory-check
+  dependencies:
+    - file-check
+  before_script:
+    - apt-get update && apt-get install -y valgrind
+  script:
+    - make test
+    - make mem-test
