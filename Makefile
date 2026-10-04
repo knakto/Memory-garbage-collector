@@ -12,7 +12,7 @@ VFLAGS	:= --leak-check=full --error-exitcode=1
 all: $(TEST_BIN)
 
 $(TEST_BIN) test:
-	$(CC) $(CFLAGS) $(TEST_SRCS) $(INC) -o $@
+	$(CC) $(CFLAGS) $(TEST_SRCS) $(INC) -o $(TEST_BIN)
 	./$(TEST_BIN)
 
 mem-test:
