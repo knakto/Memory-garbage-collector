@@ -1,4 +1,4 @@
-#include "../inc/mem_gbc.h"
+#include "mem_gbc.h"
 #include <stdio.h>
 #include <assert.h>
 
@@ -12,6 +12,11 @@ void mem_gbc_allocate(void)
 	(void)item6;
 	(void)item7;
 	(void)item8;
+
+	//free test
+	gbc_free(item5);
+	gbc_free(item6);
+	gbc_free(item7);
 }
 
 void mem_gbc_test(void)
