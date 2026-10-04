@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  ⚓ mem_gbc
+   ⚓ Memory Gabage Collector (mem-gbc)
   <br>
 </h1>
 
