@@ -23,7 +23,7 @@
 
 <p align="center">
   <i>🌍 Read this document in other languages:</i><br>
-  <a href="assets/README-en.md">🇬🇧 English</a> | <a href="Readme.md">🇹🇭 ภาษาไทย</a>
+  <a href="assets/README-en.md">🇬🇧 English</a> | <a href="../Readme.md">🇹🇭 ภาษาไทย</a>
 </p>
 
 <p align="center">
