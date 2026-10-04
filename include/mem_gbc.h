@@ -12,7 +12,6 @@ typedef struct s_lst
 	void			*content;
 	struct s_lst	*next;
 } t_lst;
-
 // Definition
 t_lst	*lst_new(void *content);
 void	lst_addback(t_lst **head, t_lst *node);
@@ -71,6 +70,7 @@ void	lst_clear(t_lst **head, void (*f)(void *))
 // Definition
 t_lst	**global_pointer_storage(void);
 void	*gbc_malloc(size_t n);
+void	gbc_free(void *block);
 void	gbc_clear(void);
 
 //implimentation
@@ -88,6 +88,27 @@ void	*gbc_malloc(size_t n)
 		return NULL;
 	lst_addback(global_pointer_storage(), lst_new(block));
 	return block;
+}
+
+void	gbc_free(void *block)
+{
+	t_lst *node = *global_pointer_storage();
+	t_lst *prev = NULL;
+	while (node)
+	{
+		if (node->content == block)
+			break ;
+		prev = node;
+		node = node->next;
+	}
+	if (!node)
+		return ;
+	if (!prev)
+		(*global_pointer_storage())->next = node->next;
+	else
+		prev->next = node->next;
+	free(node->content);
+	free(node);
 }
 
 void	gbc_clear(void)

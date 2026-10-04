@@ -1,7 +1,7 @@
 NAME	:= mem_gbc
 CC		:= cc
 CFLAGS	:= -Wall -Wextra -Werror
-INC		:= -Iinc
+INC		:= -Iinclude
 
 TEST_BIN	:= test_runner
 TEST_SRCS	:= test/test_main.c
